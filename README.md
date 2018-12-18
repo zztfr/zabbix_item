@@ -1,1 +1,1 @@
-zabbix 监控模板
+zabbix 监控模板脚本集合
