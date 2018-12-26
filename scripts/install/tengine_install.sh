@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-#Install Nginx
+#Install Tengine
 
 #1.判断网络
 ping -c1 www.baidu.com &>/dev/null
@@ -7,14 +7,14 @@ if [ $? -ne 0 ];then
         echo "请检查你的网络."
         exit 1
 fi
-yum install -y openssl-devel pcre-devel zlib-devel gcc gcc-c++ autoconf automake &>/dev/null
+yum install -y pcre-devel zlib-devel gcc gcc-c++ autoconf automake openssl-devel &>/dev/null
 
 Path=/soft/src
-Edition=nginx-1.14.2
+Edition=tengine-2.1.2
 Path1=/soft
 
 mkdir $Path -p
-wget -P $Path http://nginx.org/download/$Edition.tar.gz
+wget -P $Path http://tengine.taobao.org/download/$Edition.tar.gz
 sleep 5
 tar xf $Path/$Edition.tar.gz
 groupadd nginx
@@ -27,6 +27,7 @@ else
    make && make install
 fi
 
+
 ln -s $Path1/$Edition/sbin/nginx /usr/local/bin/nginx
-ln -s $Path1/$Edition $Path1/nginx
+ln -s $Path1/$Edition $Path1/tengine
 
