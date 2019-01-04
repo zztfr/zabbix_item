@@ -1,0 +1,16 @@
+#Description：centos7 deamo
+FROM centos:7.6.1810
+#依赖脚本生成的镜像版本
+MAINTAINER "TFR <1393233384@qq.com>"
+
+RUN yum install -y wget \
+&& sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config \
+&& wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
+&& wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo \
+&& yum update \
+&& yum install -y groupinstall Base Compatibility libraries Debugging  \
+Dial-up Networking suppport Hardware monitoring utilities Performance Tools Development tools \
+net-tools vim telnet lsof \
+&& yum clean all && rm -rf /var/cache/yum/*
+
+CMD ["/bin/bash"]
